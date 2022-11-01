@@ -172,12 +172,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsHead: 1
   previouspartposition: {fileID: 0}
-  SnakeMaterial:
-  - {fileID: 2100000, guid: fa38e3e5a3b7e58488a86e47af8936f8, type: 2}
-  - {fileID: 2100000, guid: 77679439992f7ed4e8ccbab099713093, type: 2}
+  Speed: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  SnakeMaterial:
+  - {fileID: 2100000, guid: fa38e3e5a3b7e58488a86e47af8936f8, type: 2}
+  - {fileID: 2100000, guid: 77679439992f7ed4e8ccbab099713093, type: 2}
 --- !u!135 &295671906
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -659,7 +660,7 @@ Transform:
   m_GameObject: {fileID: 2017461561}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
