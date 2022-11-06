@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SnakeScript : MonoBehaviour
@@ -14,8 +13,7 @@ public class SnakeScript : MonoBehaviour
 
     public Material[] SnakeMaterial;
 
-    public Vector3 _previousposition;
-
+    private Vector3 _previousposition;
     
 
     private void UpdateMaterial() //метод для изменения цвета частей змеи
@@ -54,7 +52,7 @@ public class SnakeScript : MonoBehaviour
         else
         {
             Vector3 delta = transform.position - previouspart.GetComponent<SnakeScript>()._previousposition;
-            transform.position -= delta * Speed * 3 * Time.deltaTime;
+            transform.position -= delta * Speed * 4 * Time.deltaTime;
         }
     }
 }
