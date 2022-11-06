@@ -10,9 +10,6 @@ public class SnakeScript : MonoBehaviour
     [Min(0)]
     public float Speed;
 
-    [Min(0)]
-    public float Sensetive;
-
     [SerializeField] private LayerMask layerMask;
 
     public Material[] SnakeMaterial;
@@ -57,7 +54,7 @@ public class SnakeScript : MonoBehaviour
         else
         {
             Vector3 delta = transform.position - previouspart.GetComponent<SnakeScript>()._previousposition;
-            transform.position -= delta * Speed * 2 * Time.deltaTime;
+            transform.position -= delta * Speed * 3 * Time.deltaTime;
         }
     }
 }
