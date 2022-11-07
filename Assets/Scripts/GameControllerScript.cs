@@ -11,6 +11,9 @@ public class GameControllerScript : MonoBehaviour
 
     public SnakeScript Controls;
 
+    [HideInInspector]
+    public int SnakeHealt;
+
     public enum State
     {
         Playing,
@@ -49,8 +52,14 @@ public class GameControllerScript : MonoBehaviour
 
     private void Awake()
     {
-        //CreateSnakePart(3);
-        //DestroySnakePart(1);
+        SnakeHealt = 3;
+        CreateSnakePart(SnakeHealt - 1);
+    }
+
+    private void Update()
+    {
+        if (SnakeHealt <=0)
+            OnSnakeDied();
     }
     public void CreateSnakePart(int _partsnumber)
     {

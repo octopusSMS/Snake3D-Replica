@@ -6,6 +6,10 @@ public class CameraFollow : MonoBehaviour
     public Vector3 PlatformToCameraOfset;
     public float Speed;
 
+    private void Awake()
+    {
+        Speed = Snake.Speed;
+    }
     void Update()
     {
         if (Snake._previousposition == null) return;
