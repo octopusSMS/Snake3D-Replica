@@ -9,8 +9,6 @@ public class LevelGeneration : MonoBehaviour
     public int MaxPlatforms;
     public float DistanceBetweenPlatforms;
     public Transform FinishPlatform;
-    //public Transform CylinderRoot;
-    //public float ExtraCylinderScale = 1f;
     public GameControllerScript Game;
 
     private void Awake()
@@ -19,7 +17,7 @@ public class LevelGeneration : MonoBehaviour
         Random random = new Random(levelIndex);
 
         int platformsCount = RandomRange(random, MinPlatforms, MaxPlatforms + 1);
-
+        Debug.Log("Platforms=" + platformsCount);
         for (int i = 0; i < platformsCount; i++)
         {
             int prefabIndex = RandomRange(random, 0, PlatformPrefabs.Length);
@@ -39,11 +37,6 @@ public class LevelGeneration : MonoBehaviour
         int length = maxExclusive - min;
         number %= length;
         return min + number;
-    }
-    private float RandomRange(Random random, float min, float max)
-    {
-        float t = (float)random.NextDouble();
-        return Mathf.Lerp(min, max, t);
     }
 
     private Vector3 CalculatePlatformPosition(int platformindex)

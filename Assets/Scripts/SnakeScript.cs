@@ -15,6 +15,7 @@ public class SnakeScript : MonoBehaviour
 
     [HideInInspector]
     public Vector3 _previousposition;
+    public GameControllerScript Game;
     
 
     private void UpdateMaterial() //метод для изменения цвета частей змеи
@@ -55,5 +56,12 @@ public class SnakeScript : MonoBehaviour
             Vector3 delta = transform.position - previouspart.GetComponent<SnakeScript>()._previousposition;
             transform.position -= delta * Speed * 4 * Time.deltaTime;
         }
+    }
+
+    public void ReachFinish()
+    {
+        Game.OnPlayerReachedFinish();
+        Speed = 0;
+
     }
 }
