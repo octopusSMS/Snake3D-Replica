@@ -19,6 +19,8 @@ public class GameControllerScript : MonoBehaviour
     }
     public State CurrentState { get; private set; }
 
+    private const string LevelIndexKey = "LevelIndex";
+
     public void OnSnakeDied()
     {
         if (CurrentState != State.Playing) return;
@@ -71,5 +73,15 @@ public class GameControllerScript : MonoBehaviour
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public int LevelIndex
+    {
+        get => PlayerPrefs.GetInt(LevelIndexKey, 0);
+        private set
+        {
+            PlayerPrefs.SetInt(LevelIndexKey, value);
+            PlayerPrefs.Save();
+        }
     }
 }
