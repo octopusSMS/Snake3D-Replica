@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class GameControllerScript : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameControllerScript : MonoBehaviour
     private void Awake()
     {
         //CreateSnakePart(3);
+        DestroySnakePart(1);
     }
     public void CreateSnakePart(int _partsnumber)
     {
@@ -26,7 +28,8 @@ public class GameControllerScript : MonoBehaviour
     {
         for (int i = 0; i < _partsnumber; i++)
         {
-            //Destroy()
+            Destroy(Snake.Last());
+            Snake.RemoveAt(Snake.IndexOf(Snake.Last()));
         }
     }
 }
