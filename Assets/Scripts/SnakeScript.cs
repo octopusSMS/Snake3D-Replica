@@ -13,7 +13,8 @@ public class SnakeScript : MonoBehaviour
 
     public Material[] SnakeMaterial;
 
-    private Vector3 _previousposition;
+    [HideInInspector]
+    public Vector3 _previousposition;
     
 
     private void UpdateMaterial() //метод для изменения цвета частей змеи

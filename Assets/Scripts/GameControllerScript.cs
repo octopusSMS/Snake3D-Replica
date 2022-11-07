@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour
 {
@@ -9,11 +9,46 @@ public class GameControllerScript : MonoBehaviour
 
     public GameObject SnakePrefab;
 
+    public SnakeScript Controls;
+
+    public enum State
+    {
+        Playing,
+        Won,
+        Loss,
+    }
+    public State CurrentState { get; private set; }
+
+    public void OnSnakeDied()
+    {
+        if (CurrentState != State.Playing) return;
+
+        CurrentState = State.Loss;
+        Controls.enabled = false;
+        Debug.Log("Game Over!");
+
+        //Slider.SetActive(false);
+        //TextDestroyedPlatforms.SetActive(false);
+        //RestartButton.SetActive(true);
+        ReloadLevel();
+    }
+
+    public void OnPlayerReachedFinish()
+    {
+        if (CurrentState != State.Playing) return;
+
+        CurrentState = State.Won;
+        //LevelIndex++;
+        Controls.enabled = false;
+        Debug.Log("You won!");
+        
+        ReloadLevel();
+    }
 
     private void Awake()
     {
         //CreateSnakePart(3);
-        DestroySnakePart(1);
+        //DestroySnakePart(1);
     }
     public void CreateSnakePart(int _partsnumber)
     {
@@ -31,5 +66,10 @@ public class GameControllerScript : MonoBehaviour
             Destroy(Snake.Last());
             Snake.RemoveAt(Snake.IndexOf(Snake.Last()));
         }
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
