@@ -114,6 +114,7 @@ MonoBehaviour:
   IsHead: 0
   previouspart: {fileID: 0}
   Speed: 1
+  Sensitive: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 64

@@ -411,7 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Snake: {fileID: 295671909}
   PlatformToCameraOfset: {x: 0, y: 9, z: -8}
-  Speed: 4
 --- !u!4 &652281243
 Transform:
   m_ObjectHideFlags: 0
@@ -761,12 +760,17 @@ PrefabInstance:
     - target: {fileID: 7331901887511739251, guid: 5c4c56c147f3a3f47888b0f6dbad9814,
         type: 3}
       propertyPath: Speed
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7331901887511739251, guid: 5c4c56c147f3a3f47888b0f6dbad9814,
         type: 3}
       propertyPath: IsHead
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331901887511739251, guid: 5c4c56c147f3a3f47888b0f6dbad9814,
+        type: 3}
+      propertyPath: Sensitive
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4c56c147f3a3f47888b0f6dbad9814, type: 3}

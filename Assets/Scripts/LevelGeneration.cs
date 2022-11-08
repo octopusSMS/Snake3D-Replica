@@ -17,26 +17,32 @@ public class LevelGeneration : MonoBehaviour
         Random random = new Random(levelIndex);
 
         int platformsCount = RandomRange(random, MinPlatforms, MaxPlatforms + 1);
-        Debug.Log("Platforms=" + platformsCount);
-        for (int i = 0; i < platformsCount; i++)
+        Debug.Log("platforms "+platformsCount);
+        /*for (int i = 0; i < platformsCount; i++)
         {
             int prefabIndex = RandomRange(random, 0, PlatformPrefabs.Length);
-
+            
             GameObject platformPrefab = i == 0 ? FirstPlatformPrefab : PlatformPrefabs[prefabIndex];
             GameObject platform = Instantiate(platformPrefab, FirstPlatformPrefab.transform);
 
             platform.transform.localPosition = CalculatePlatformPosition(i);
         }
 
-        FinishPlatform.localPosition = CalculatePlatformPosition(platformsCount);
+        FinishPlatform.localPosition = CalculatePlatformPosition(platformsCount);*/
     }
 
-    private int RandomRange(Random random, int min, int maxExclusive)
+    private int RandomRange(Random random, int min, int maxExclusive) //неработает здесь
     {
-        int number = random.Next();
-        int length = maxExclusive - min;
-        number %= length;
-        return min + number;
+        int number = random.Next(); Debug.Log(number);
+        int length = maxExclusive - min; Debug.Log(length);
+        number %= length; Debug.Log(number); Debug.Log(min+number); //точнее здесь
+        return min + number; 
+        
+    }
+    private float RandomRange(Random random, float min, float max)
+    {
+        float t = (float)random.NextDouble();
+        return Mathf.Lerp(min, max, t);
     }
 
     private Vector3 CalculatePlatformPosition(int platformindex)

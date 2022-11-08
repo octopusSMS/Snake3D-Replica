@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SnakeScript : MonoBehaviour
@@ -8,6 +9,8 @@ public class SnakeScript : MonoBehaviour
 
     [Min(0)]
     public float Speed;
+    [Min(0)]
+    public float Sensitive;
 
     [SerializeField] private LayerMask layerMask;
 
@@ -43,19 +46,22 @@ public class SnakeScript : MonoBehaviour
 
         if (IsHead)
         {
+            transform.position += new Vector3(0, 0, Speed * Time.deltaTime);
             if (Input.GetMouseButton(0)) // при нажатии левой кнопки мыши
             {
                 Ray Ray = Camera.main.ScreenPointToRay(Input.mousePosition); //из камеры вылетает луч 
                 if (Physics.Raycast(Ray, out RaycastHit rayCastHit, float.MaxValue, layerMask)) //определяется точка пересечения луча и объекта с layer=flore
-                    transform.position = new Vector3(rayCastHit.point.x, 0.5f, transform.position.z); //позиция передается объекту
+                    //transform.position = new Vector3(rayCastHit.point.x, 0.5f, transform.position.z); //позиция передается объекту
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(rayCastHit.point.x, 0.5f, transform.position.z) , Sensitive * Time.deltaTime);
             }
-            transform.position += new Vector3(0, 0, Speed * Time.deltaTime);
+            
         }
         else
         {
-            Vector3 delta = transform.position - previouspart.GetComponent<SnakeScript>()._previousposition;
-            transform.position -= delta * Speed * 4 * Time.deltaTime;
-        }
+            Vector3 delta = /*transform.position - */previouspart.GetComponent<SnakeScript>()._previousposition;
+            //transform.position -= delta * Speed * 4 * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, delta, 10 * Speed * Time.deltaTime);    
+        } 
     }
 
     public void ReachFinish()

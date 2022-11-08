@@ -86,7 +86,7 @@ public class GameControllerScript : MonoBehaviour
 
     public int LevelIndex
     {
-        get => PlayerPrefs.GetInt(LevelIndexKey, 0);
+        get => PlayerPrefs.GetInt(LevelIndexKey, 1);
         private set
         {
             PlayerPrefs.SetInt(LevelIndexKey, value);
