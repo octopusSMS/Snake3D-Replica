@@ -111,7 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c03154e2a981f47acc1e6ae3419985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 0
+  Difficulty: 1
+  Material:
+  - {fileID: 2100000, guid: b3c68f087a4a97e49b235973ed4679a0, type: 2}
+  - {fileID: 2100000, guid: b3cb9562605426145b84d5f0d1b50f01, type: 2}
+  - {fileID: 2100000, guid: 14b12b4642f82ae47b2b47ea439f2f16, type: 2}
+  - {fileID: 2100000, guid: 21dcd70cb4a097b4cbbd1da39c5a8e9e, type: 2}
+  - {fileID: 2100000, guid: 8a163d0546458594fa141b4a5c774010, type: 2}
 --- !u!1 &7807667401505076095
 GameObject:
   m_ObjectHideFlags: 0
