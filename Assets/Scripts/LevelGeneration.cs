@@ -5,8 +5,7 @@ public class LevelGeneration : MonoBehaviour
 {
     public GameObject[] PlatformPrefabs;
     public GameObject FirstPlatformPrefab;
-    public int MinPlatforms;
-    public int MaxPlatforms;
+    public int MinPlatforms;    
     public float DistanceBetweenPlatforms;
     public Transform FinishPlatform;
     public GameControllerScript Game;
@@ -16,9 +15,9 @@ public class LevelGeneration : MonoBehaviour
         int levelIndex = Game.LevelIndex;
         Random random = new Random(levelIndex);
 
-        int platformsCount = RandomRange(random, MinPlatforms, MaxPlatforms + 1);
-        Debug.Log("platforms "+platformsCount);
-        /*for (int i = 0; i < platformsCount; i++)
+        int platformsCount = RandomRange(random, MinPlatforms, MinPlatforms+levelIndex+1);
+        
+        for (int i = 0; i < platformsCount; i++)
         {
             int prefabIndex = RandomRange(random, 0, PlatformPrefabs.Length);
             
@@ -28,14 +27,14 @@ public class LevelGeneration : MonoBehaviour
             platform.transform.localPosition = CalculatePlatformPosition(i);
         }
 
-        FinishPlatform.localPosition = CalculatePlatformPosition(platformsCount);*/
+        FinishPlatform.localPosition = CalculatePlatformPosition(platformsCount);
     }
 
-    private int RandomRange(Random random, int min, int maxExclusive) //неработает здесь
+    private int RandomRange(Random random, int min, int maxExclusive) 
     {
-        int number = random.Next(); Debug.Log(number);
-        int length = maxExclusive - min; Debug.Log(length);
-        number %= length; Debug.Log(number); Debug.Log(min+number); //точнее здесь
+        int number = random.Next(); 
+        int length = maxExclusive - min; 
+        number %= length; 
         return min + number; 
         
     }

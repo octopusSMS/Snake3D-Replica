@@ -67,8 +67,10 @@ public class GameControllerScript : MonoBehaviour
         {
             var Snakepart = Instantiate(SnakePrefab, this.transform);
             Snakepart.GetComponent<SnakeScript>().previouspart = Snake.Last();
+            Snakepart.transform.position = new Vector3(Snake.Last().transform.position.x, Snakepart.transform.position.y, (Snake.Last().transform.position.z-1));
             Snake.Add(Snakepart);
         }
+        SnakeHealt += _partsnumber;
     }
     public void DestroySnakePart( int _partsnumber)
     {
@@ -77,6 +79,7 @@ public class GameControllerScript : MonoBehaviour
             Destroy(Snake.Last());
             Snake.RemoveAt(Snake.IndexOf(Snake.Last()));
         }
+        SnakeHealt -= _partsnumber;
     }
 
     public void ReloadLevel()
