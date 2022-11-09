@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 1089608013}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformPrefabs:
-  - {fileID: 8745817651415316322, guid: ce851a45da03c1e48ab59bb0b5eb1d4c, type: 3}
+  - {fileID: 8745817651415316322, guid: 7e2ddc2e8d2a20545957b3710491a30b, type: 3}
   - {fileID: 2418001428545516863, guid: 8e6201700b509014493bc419790ac599, type: 3}
   - {fileID: 2418001428545516863, guid: 84d9c2328ebd4954283769509d7fddbd, type: 3}
   - {fileID: 2418001428545516863, guid: 2c4f77f00d4f9bb4088c56c135172d0d, type: 3}
@@ -559,7 +559,6 @@ MonoBehaviour:
   - {fileID: 2418001428545516863, guid: c00e93ee6fc639d498e4116ecc19e821, type: 3}
   FirstPlatformPrefab: {fileID: 2017461561}
   MinPlatforms: 5
-  MaxPlatforms: 10
   DistanceBetweenPlatforms: 10
   FinishPlatform: {fileID: 2107625357}
   Game: {fileID: 1089608011}

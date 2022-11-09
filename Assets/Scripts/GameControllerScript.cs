@@ -58,7 +58,7 @@ public class GameControllerScript : MonoBehaviour
 
     private void Update()
     {
-        if (SnakeHealt <=0)
+        if (SnakeHealt <=1)
             OnSnakeDied();
     }
     public void CreateSnakePart(int _partsnumber)

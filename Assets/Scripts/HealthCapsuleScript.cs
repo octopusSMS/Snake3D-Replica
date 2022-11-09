@@ -1,16 +1,15 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = System.Random;
 
 public class HealthCapsuleScript : MonoBehaviour
 {
-    public GameControllerScript game;
+    private GameControllerScript Game;
     public int HealthCapacity;    
     private TextMesh Text;
 
     private void Awake()
     {
+        Game = FindObjectOfType<GameControllerScript>();
         Random random = new Random();
         HealthCapacity = random.Next(1, 5);
         Text = GetComponentInChildren<TextMesh>();
@@ -18,8 +17,8 @@ public class HealthCapsuleScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        game.CreateSnakePart(HealthCapacity); 
-        Destroy(this);
+        Game.CreateSnakePart(HealthCapacity); 
+        Destroy(this.gameObject);
     }
     
 }
