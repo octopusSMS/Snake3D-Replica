@@ -35,17 +35,11 @@ public class BlockScript : MonoBehaviour
                 GetComponent<Renderer>().sharedMaterial = Material[4];
                 break;
         }
-        //GetComponent<Renderer>().sharedMaterial
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Difficulty < Game.SnakeHealt+1)
-        {
-            Game.DestroySnakePart(Difficulty);
-            Destroy(this.gameObject);
-        }
-        else
-            Game.SnakeHealt -= 0;
+        Game.DestroySnakePart(Difficulty);
+        Destroy(this.gameObject);
     }
 }

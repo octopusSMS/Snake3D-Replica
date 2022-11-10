@@ -12,7 +12,7 @@ public class GameControllerScript : MonoBehaviour
     public SnakeScript Controls;
 
     [HideInInspector]
-    public int SnakeHealt;
+    //public int SnakeHealt;
 
     public enum State
     {
@@ -23,6 +23,7 @@ public class GameControllerScript : MonoBehaviour
     public State CurrentState { get; private set; }
 
     private const string LevelIndexKey = "LevelIndex";
+    private const string SnakeHealthKey = "SnakeHealth";
 
     public void OnSnakeDied()
     {
@@ -43,7 +44,7 @@ public class GameControllerScript : MonoBehaviour
         if (CurrentState != State.Playing) return;
 
         CurrentState = State.Won;
-        //LevelIndex++;
+        LevelIndex++;
         Controls.enabled = false;
         Debug.Log("You won!");
         
@@ -52,13 +53,16 @@ public class GameControllerScript : MonoBehaviour
 
     private void Awake()
     {
-        SnakeHealt = 3;
-        CreateSnakePart(SnakeHealt - 1);
+        if (SnakeHealth<=2)
+            CreateSnakePart(2);
+        else
+            CreateSnakePart(SnakeHealth);
     }
 
     private void Update()
     {
-        if (SnakeHealt <=1)
+        SnakeHealth = transform.childCount-1;
+        if (SnakeHealth <=0)
             OnSnakeDied();
     }
     public void CreateSnakePart(int _partsnumber)
@@ -70,7 +74,6 @@ public class GameControllerScript : MonoBehaviour
             Snakepart.transform.position = new Vector3(Snake.Last().transform.position.x, Snakepart.transform.position.y, (Snake.Last().transform.position.z-1));
             Snake.Add(Snakepart);
         }
-        SnakeHealt += _partsnumber;
     }
     public void DestroySnakePart( int _partsnumber)
     {
@@ -79,7 +82,6 @@ public class GameControllerScript : MonoBehaviour
             Destroy(Snake.Last());
             Snake.RemoveAt(Snake.IndexOf(Snake.Last()));
         }
-        SnakeHealt -= _partsnumber;
     }
 
     public void ReloadLevel()
@@ -96,4 +98,15 @@ public class GameControllerScript : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+    public int SnakeHealth
+    {
+        get => PlayerPrefs.GetInt(SnakeHealthKey, 2);
+        private set
+        {
+            PlayerPrefs.SetInt(SnakeHealthKey, value);
+            PlayerPrefs.Save();
+        }
+    }
+
+
 }
