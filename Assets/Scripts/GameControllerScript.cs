@@ -79,6 +79,7 @@ public class GameControllerScript : MonoBehaviour
     {
         for (int i = 0; i < _partsnumber; i++)
         {
+            if (Snake.Count == 1) return;
             Destroy(Snake.Last());
             Snake.RemoveAt(Snake.IndexOf(Snake.Last()));
         }
