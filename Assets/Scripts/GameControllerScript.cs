@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,9 +11,8 @@ public class GameControllerScript : MonoBehaviour
     public GameObject SnakePrefab;
 
     public SnakeScript Controls;
-
-    [HideInInspector]
-    public int SnakeHealt;
+    public GameObject WinTextImage;
+    public GameObject ResetButton;
 
     public enum State
     {
@@ -23,42 +23,44 @@ public class GameControllerScript : MonoBehaviour
     public State CurrentState { get; private set; }
 
     private const string LevelIndexKey = "LevelIndex";
+    private const string SnakeHealthKey = "SnakeHealth";
 
     public void OnSnakeDied()
     {
         if (CurrentState != State.Playing) return;
-
+        
         CurrentState = State.Loss;
         Controls.enabled = false;
         Debug.Log("Game Over!");
 
-        //Slider.SetActive(false);
-        //TextDestroyedPlatforms.SetActive(false);
-        //RestartButton.SetActive(true);
-        ReloadLevel();
+        ResetButton.SetActive(true);        
     }
 
     public void OnPlayerReachedFinish()
     {
         if (CurrentState != State.Playing) return;
 
+        Snake[0].GetComponent<SnakeScript>().Speed = 0;
         CurrentState = State.Won;
-        //LevelIndex++;
+        LevelIndex++;
         Controls.enabled = false;
-        Debug.Log("You won!");
-        
-        ReloadLevel();
+        //Debug.Log("You won!");
+        StartCoroutine (WaitForSecondAndReload(1));
+        WinTextImage.SetActive(true);
     }
 
     private void Awake()
     {
-        SnakeHealt = 3;
-        CreateSnakePart(SnakeHealt - 1);
+        if (SnakeHealth<=2)
+            CreateSnakePart(2);
+        else
+            CreateSnakePart(SnakeHealth);
     }
 
     private void Update()
     {
-        if (SnakeHealt <=1)
+        SnakeHealth = transform.childCount-1;
+        if (SnakeHealth <=0)
             OnSnakeDied();
     }
     public void CreateSnakePart(int _partsnumber)
@@ -70,16 +72,15 @@ public class GameControllerScript : MonoBehaviour
             Snakepart.transform.position = new Vector3(Snake.Last().transform.position.x, Snakepart.transform.position.y, (Snake.Last().transform.position.z-1));
             Snake.Add(Snakepart);
         }
-        SnakeHealt += _partsnumber;
     }
     public void DestroySnakePart( int _partsnumber)
     {
         for (int i = 0; i < _partsnumber; i++)
         {
+            if (Snake.Count == 1) return;
             Destroy(Snake.Last());
             Snake.RemoveAt(Snake.IndexOf(Snake.Last()));
         }
-        SnakeHealt -= _partsnumber;
     }
 
     public void ReloadLevel()
@@ -95,5 +96,20 @@ public class GameControllerScript : MonoBehaviour
             PlayerPrefs.SetInt(LevelIndexKey, value);
             PlayerPrefs.Save();
         }
+    }
+    public int SnakeHealth
+    {
+        get => PlayerPrefs.GetInt(SnakeHealthKey, 2);
+        private set
+        {
+            PlayerPrefs.SetInt(SnakeHealthKey, value);
+            PlayerPrefs.Save();
+        }
+    }
+
+    IEnumerator WaitForSecondAndReload(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        ReloadLevel();
     }
 }

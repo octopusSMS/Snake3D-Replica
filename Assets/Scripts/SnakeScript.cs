@@ -64,10 +64,5 @@ public class SnakeScript : MonoBehaviour
         } 
     }
 
-    public void ReachFinish()
-    {
-        Game.OnPlayerReachedFinish();
-        Speed = 0;
-
-    }
+    
 }
