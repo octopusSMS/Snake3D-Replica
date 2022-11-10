@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,9 +11,8 @@ public class GameControllerScript : MonoBehaviour
     public GameObject SnakePrefab;
 
     public SnakeScript Controls;
-
-    [HideInInspector]
-    //public int SnakeHealt;
+    public GameObject WinTextImage;
+    public GameObject ResetButton;
 
     public enum State
     {
@@ -28,27 +28,25 @@ public class GameControllerScript : MonoBehaviour
     public void OnSnakeDied()
     {
         if (CurrentState != State.Playing) return;
-
+        
         CurrentState = State.Loss;
         Controls.enabled = false;
         Debug.Log("Game Over!");
 
-        //Slider.SetActive(false);
-        //TextDestroyedPlatforms.SetActive(false);
-        //RestartButton.SetActive(true);
-        ReloadLevel();
+        ResetButton.SetActive(true);        
     }
 
     public void OnPlayerReachedFinish()
     {
         if (CurrentState != State.Playing) return;
 
+        Snake[0].GetComponent<SnakeScript>().Speed = 0;
         CurrentState = State.Won;
         LevelIndex++;
         Controls.enabled = false;
-        Debug.Log("You won!");
-        
-        ReloadLevel();
+        //Debug.Log("You won!");
+        StartCoroutine (WaitForSecondAndReload(1));
+        WinTextImage.SetActive(true);
     }
 
     private void Awake()
@@ -109,5 +107,9 @@ public class GameControllerScript : MonoBehaviour
         }
     }
 
-
+    IEnumerator WaitForSecondAndReload(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        ReloadLevel();
+    }
 }
