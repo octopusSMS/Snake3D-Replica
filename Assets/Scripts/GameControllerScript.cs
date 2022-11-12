@@ -14,6 +14,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject WinTextImage;
     public GameObject ResetButton;
     public ParticleSystem FinishParticle;
+    public ParticleSystem SnakeDieParticle;
 
     public enum State
     {
@@ -33,6 +34,7 @@ public class GameControllerScript : MonoBehaviour
         CurrentState = State.Loss;
         Controls.enabled = false;
         Debug.Log("Game Over!");
+        SnakeDieParticle.Play();
 
         ResetButton.SetActive(true);        
     }
