@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = System.Random;
 
@@ -40,6 +41,16 @@ public class BlockScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Game.DestroySnakePart(Difficulty);
+        Destroy(GetComponent<BoxCollider>());
+        Destroy(GetComponent<MeshRenderer>());
+
+        StartCoroutine(WaitForSecondAndDestroy(1));
+    }
+
+    IEnumerator WaitForSecondAndDestroy(int second)
+    {
+        GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(second);
         Destroy(this.gameObject);
     }
 }

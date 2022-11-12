@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = System.Random;
 
@@ -17,8 +18,16 @@ public class HealthCapsuleScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Game.CreateSnakePart(HealthCapacity); 
+        Game.CreateSnakePart(HealthCapacity);
+        Destroy(GetComponent<MeshRenderer>());
+        Destroy(GetComponent<CapsuleCollider>());   
+        StartCoroutine(WaitForSecondAndDestroy(1));
+    }
+
+    IEnumerator WaitForSecondAndDestroy(int seconds)
+    {
+        GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(seconds);
         Destroy(this.gameObject);
     }
-    
 }

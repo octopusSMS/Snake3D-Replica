@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77679439992f7ed4e8ccbab099713093, type: 2}
+  - {fileID: 2100000, guid: 4264b853ced8b0a4a8069f57470907a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   SnakeMaterial:
-  - {fileID: 2100000, guid: fa38e3e5a3b7e58488a86e47af8936f8, type: 2}
-  - {fileID: 2100000, guid: 77679439992f7ed4e8ccbab099713093, type: 2}
+  - {fileID: 2100000, guid: 5a5a06f6f3393ed439a61f5a986aa73f, type: 2}
+  - {fileID: 2100000, guid: 4264b853ced8b0a4a8069f57470907a9, type: 2}
   _previousposition: {x: 0, y: 0, z: 0}
   Game: {fileID: 0}
 --- !u!54 &5792510034497750497
