@@ -15,6 +15,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject ResetButton;
     public ParticleSystem FinishParticle;
     public ParticleSystem SnakeDieParticle;
+    public AudioSource FinishSound;
 
     public enum State
     {
@@ -35,6 +36,7 @@ public class GameControllerScript : MonoBehaviour
         Controls.enabled = false;
         Debug.Log("Game Over!");
         SnakeDieParticle.Play();
+        GetComponent<AudioSource>().Stop();
 
         ResetButton.SetActive(true);        
     }
@@ -43,6 +45,7 @@ public class GameControllerScript : MonoBehaviour
     {
         if (CurrentState != State.Playing) return;
 
+        GetComponent<AudioSource>().Stop();
         Snake[0].GetComponent<SnakeScript>().Speed = 0;
         CurrentState = State.Won;
         LevelIndex++;
@@ -112,6 +115,7 @@ public class GameControllerScript : MonoBehaviour
 
     IEnumerator WaitForSecondAndReload(int seconds)
     {
+        FinishSound.Play();
         FinishParticle.Play();
         yield return new WaitForSeconds(seconds);
         ReloadLevel();
