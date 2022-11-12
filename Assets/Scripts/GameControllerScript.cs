@@ -13,6 +13,7 @@ public class GameControllerScript : MonoBehaviour
     public SnakeScript Controls;
     public GameObject WinTextImage;
     public GameObject ResetButton;
+    public ParticleSystem FinishParticle;
 
     public enum State
     {
@@ -109,6 +110,7 @@ public class GameControllerScript : MonoBehaviour
 
     IEnumerator WaitForSecondAndReload(int seconds)
     {
+        FinishParticle.Play();
         yield return new WaitForSeconds(seconds);
         ReloadLevel();
     }
